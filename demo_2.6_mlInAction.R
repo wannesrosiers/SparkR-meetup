@@ -26,16 +26,15 @@ lapply(nb[["model"]], function(mod){
 # Inspect the model
 collect(nb[["model"]]$Petal_Width)
 
-# # Rather not run this part, slow due to network traffic
-# # get threshold
-# nb_calibPred <- predict_NaiveBayes(nb_calib, nb[["scales"]], nb[["model"]])
-# nb_thresh    <- getThreshold(nb_calibPred, "response", "rate", 100)
-# 
-# # get measures on test set
-# nb_testPred            <- getColumns(predict_NaiveBayes(nb_test, nb[["scales"]], nb[["model"]]), c("response", "rate"))
-# nb_testPred$prediction <- nb_testPred$rate > nb_thresh[["threshold"]]
-# nb_confusionList       <- getConfusionList(nb_testPred, "response", "prediction")
-# am                     <- accuracyMeasures(nb_confusionList,NULL,"NaiveBayes")
+# get threshold
+nb_calibPred <- predict_NaiveBayes(nb_calib, nb[["scales"]], nb[["model"]])
+nb_thresh    <- getThreshold(nb_calibPred, "response", "rate", 100)
+
+# get measures on test set
+nb_testPred            <- getColumns(predict_NaiveBayes(nb_test, nb[["scales"]], nb[["model"]]), c("response", "rate"))
+nb_testPred$prediction <- nb_testPred$rate > nb_thresh[["threshold"]]
+nb_confusionList       <- getConfusionList(nb_testPred, "response", "prediction")
+am                     <- accuracyMeasures(nb_confusionList,NULL,"NaiveBayes")
 
   #############
     # KMEANS
