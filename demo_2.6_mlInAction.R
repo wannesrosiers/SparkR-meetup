@@ -70,6 +70,6 @@ cache(model)
 print(paste("Found", count(model), "rules"))
 
 # Create a reommendation
-user   <- "730105568"
+user   <- 730105568
 result <- getRecommendations(networkData, model, user, "user", "followed_user", "confidence", logging=FALSE)
 View(collect(result))
